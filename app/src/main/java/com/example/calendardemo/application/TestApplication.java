@@ -1,6 +1,7 @@
 package com.example.calendardemo.application;
 
 import android.app.Application;
+import android.content.Context;
 
 /**
  * Created by lxc on 2019/2/19
@@ -8,14 +9,17 @@ import android.app.Application;
  */
 public class TestApplication extends Application {
 
-    private static TestApplication app;
+    private static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        TestApplication.context = getApplicationContext();
     }
 
-    public static TestApplication getAppContext() {
-        return app;
+    public static Context getAppContext() {
+        return TestApplication.context;
     }
+
+
 }

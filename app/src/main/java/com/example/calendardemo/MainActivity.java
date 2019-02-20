@@ -9,6 +9,9 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.calendardemo.adapter.ContentAdapter;
+import com.example.calendardemo.calendar.CalendarConstantData;
+import com.example.calendardemo.calendar.CalendarTest;
+import com.example.calendardemo.calendar.SystemCalendarHandler;
 import com.example.calendardemo.view.DividerListItemDecoration;
 
 import java.util.ArrayList;
@@ -37,6 +40,7 @@ public class MainActivity extends BaseActivity {
         mTestList.add("删除行程");
         mTestList.add("修改行程");
         mTestList.add("查询行程");
+        mTestList.add("获取日历信息");
         mContentAdapter = new ContentAdapter(mTestList);
         recyclerView.setAdapter(mContentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -44,16 +48,42 @@ public class MainActivity extends BaseActivity {
         mContentAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
             }
         });
         mContentAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Log.d(TAG, "mContentAdapter onItemClick action = " + mTestList.get(position));
-                Toast.makeText(MainActivity.this, "" + mTestList.get(position), Toast.LENGTH_SHORT).show();
+                String actionString = mTestList.get(position);
+                Log.d(TAG, "mContentAdapter onItemClick action = " + actionString);
+                Toast.makeText(MainActivity.this, "" + actionString, Toast.LENGTH_SHORT).show();
+//                SystemCalendarHandler.getCalendarInfo(view.getContext());
+                long calId = SystemCalendarHandler.checkAndAddCalendarAccounts(view.getContext()); //获取日历账户的id
+                if (calId < 0) { //获取账户id失败直接返回，添加日历事件失败
+                    return;
+                }
+                if ("添加行程".equals(actionString)) {
+                    new MyThread().start();
+                }
             }
         });
+    }
+
+
+    public class MyThread extends Thread {
+
+        //继承Thread类，并改写其run方法
+
+        public void run() {
+            Log.d(TAG, "run");
+            long startTime = System.currentTimeMillis() / 1000;
+            long endTime = startTime + 60 * 10;
+            long calendarId = SystemCalendarHandler.checkCalendarAccounts(MainActivity.this);
+            SystemCalendarHandler.insertCalendarEvent(MainActivity.this, calendarId, "测试",
+                    "test", startTime, endTime, 0, CalendarConstantData.CALENDAR_EVENT_REPEAT_NEVER,
+                    "lxc测试的数据", null, 0);
+//            CalendarTest.testInsertCalendarEvent();
+        }
     }
 
 }
