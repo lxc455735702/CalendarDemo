@@ -11,10 +11,10 @@ import java.util.Calendar;
 public class MonthRule implements Rule {
     @Override
     public Calendar getNextCalendar(Calendar lastTimeCalendar) {
-        Log.d("MonthRule" ,"lastTimeCalendar = " + lastTimeCalendar.toString());
+        Log.d("MonthRule" ,"lastTimeCalendar = " + lastTimeCalendar.getTime().toString());
         Calendar copyCalendar = (Calendar)lastTimeCalendar.clone();
         copyCalendar.add(Calendar.MONTH,1);
-        Log.d("MonthRule" ,"copyCalendar = " + copyCalendar.toString());
+        Log.d("MonthRule" ,"copyCalendar = " + copyCalendar.getTime().toString());
         return copyCalendar;
     }
 }

@@ -11,10 +11,10 @@ import java.util.Calendar;
 public class WeekRule implements Rule {
     @Override
     public Calendar getNextCalendar(Calendar lastTimeCalendar) {
-        Log.d("WeekRule" ,"lastTimeCalendar = " + lastTimeCalendar.toString());
+        Log.d("WeekRule" ,"lastTimeCalendar = " + lastTimeCalendar.getTime().toString());
         Calendar copyCalendar = (Calendar)lastTimeCalendar.clone();
         copyCalendar.add(Calendar.DATE,7);
-        Log.d("WeekRule" ,"copyCalendar = " + copyCalendar.toString());
+        Log.d("WeekRule" ,"copyCalendar = " + copyCalendar.getTime().toString());
         return copyCalendar;
     }
 }

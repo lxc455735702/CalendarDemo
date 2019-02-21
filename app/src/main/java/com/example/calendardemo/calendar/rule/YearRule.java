@@ -11,10 +11,10 @@ import java.util.Calendar;
 public class YearRule implements Rule {
     @Override
     public Calendar getNextCalendar(Calendar lastTimeCalendar) {
-        Log.d("YearRule" ,"lastTimeCalendar = " + lastTimeCalendar.toString());
-        Calendar copyCalendar = (Calendar)lastTimeCalendar.clone();
-        copyCalendar.add(Calendar.YEAR,1);
-        Log.d("YearRule" ,"copyCalendar = " + copyCalendar.toString());
+        Log.d("YearRule", "lastTimeCalendar = " + lastTimeCalendar.getTime().toString());
+        Calendar copyCalendar = (Calendar) lastTimeCalendar.clone();
+        copyCalendar.add(Calendar.YEAR, 1);
+        Log.d("YearRule", "copyCalendar = " + copyCalendar.getTime().toString());
         return copyCalendar;
     }
 }

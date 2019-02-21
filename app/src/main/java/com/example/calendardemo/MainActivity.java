@@ -13,6 +13,7 @@ import com.example.calendardemo.calendar.CalendarConstantData;
 import com.example.calendardemo.calendar.CalendarTest;
 import com.example.calendardemo.calendar.SystemCalendarHandler;
 import com.example.calendardemo.view.DividerListItemDecoration;
+import com.hb.dialog.myDialog.MyAlertInputDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MainActivity extends BaseActivity {
     ContentAdapter mContentAdapter;
     List<String> mTestList = new ArrayList<>();
 
+    private MyAlertInputDialog myAlertInputDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +44,7 @@ public class MainActivity extends BaseActivity {
         mTestList.add("修改行程");
         mTestList.add("查询行程");
         mTestList.add("获取日历信息");
+        mTestList.add("测试日历下一个");
         mContentAdapter = new ContentAdapter(mTestList);
         recyclerView.setAdapter(mContentAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -64,11 +68,43 @@ public class MainActivity extends BaseActivity {
                 }
                 if ("添加行程".equals(actionString)) {
                     new MyThread().start();
+                } else if ("测试日历下一个".equals(actionString)) {
+                    CalendarTest.testNextCalendar();
+                } else if ("删除行程".equals(actionString)) {
+                    showDeleteCalendarInputDialog();
+                } else if ("修改行程".equals(actionString)) {
+
+                } else if ("查询行程".equals(actionString)) {
+
                 }
             }
         });
     }
 
+
+    private void showDeleteCalendarInputDialog() {
+        if (myAlertInputDialog == null) {
+            myAlertInputDialog = new MyAlertInputDialog(MainActivity.this).builder()
+                    .setTitle("请输入")
+                    .setEditText("请输入要删除的行程id");
+            myAlertInputDialog.setPositiveButton("确认", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String inputString = myAlertInputDialog.getContentEditText().getText().toString();
+                    Log.d(TAG, "showDeleteCalendarInputDialog  onClick inputString = " + inputString);
+                    SystemCalendarHandler.deleteCalendarEvent(MainActivity.this, inputString);
+                    myAlertInputDialog.dismiss();
+                }
+            }).setNegativeButton("取消", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myAlertInputDialog.dismiss();
+                }
+            });
+        }
+        myAlertInputDialog.getContentEditText().setText("");
+        myAlertInputDialog.show();
+    }
 
     public class MyThread extends Thread {
 

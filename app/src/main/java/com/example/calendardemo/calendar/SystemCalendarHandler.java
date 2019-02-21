@@ -282,7 +282,7 @@ public class SystemCalendarHandler {
         for (ContentValues event : eventList) {
             Uri newEventUri = context.getContentResolver().insert(CalendarConstantData.EVENT_URI, event);
             long eventId = newEventUri == null ? -1 : ContentUris.parseId(newEventUri);
-
+            Log.d(TAG,"insertCalendarEvent eventId = " + eventId);
             eventIdList.add(eventId);
         }
         return eventIdList;
@@ -300,7 +300,7 @@ public class SystemCalendarHandler {
      * @param notes
      * @return
      */
- /*   public static List<Long> updateCalendarEvent(Context context, String systemId, String title, String location,
+    public static List<Long> updateCalendarEvent(Context context, String systemId, String title, String location,
                                           long startTimeSecond, long endTimeSecond,  int allDay, int repeats,
                                           String notes, String invalidDays, long deadline){
         long calendarId = checkAndAddCalendarAccounts(context);
@@ -313,7 +313,7 @@ public class SystemCalendarHandler {
         //再插入日历事件
         return insertCalendarEvent(context, calendarId, title, location, startTimeSecond,
                 endTimeSecond, allDay, repeats, notes, invalidDays, deadline);
-    }*/
+    }
 
 
     /**

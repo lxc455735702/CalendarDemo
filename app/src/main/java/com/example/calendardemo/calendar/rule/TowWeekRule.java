@@ -11,10 +11,10 @@ import java.util.Calendar;
 public class TowWeekRule implements Rule {
     @Override
     public Calendar getNextCalendar(Calendar lastTimeCalendar) {
-        Log.d("TowWeekRule" ,"lastTimeCalendar = " + lastTimeCalendar.toString());
+        Log.d("TowWeekRule" ,"lastTimeCalendar = " + lastTimeCalendar.getTime().toString());
         Calendar copyCalendar = (Calendar)lastTimeCalendar.clone();
         copyCalendar.add(Calendar.DATE,14);
-        Log.d("TowWeekRule" ,"copyCalendar = " + copyCalendar.toString());
+        Log.d("TowWeekRule" ,"copyCalendar = " + copyCalendar.getTime().toString());
         return copyCalendar;
     }
 }

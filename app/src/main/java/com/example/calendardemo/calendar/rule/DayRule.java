@@ -12,10 +12,10 @@ public class DayRule implements Rule {
 
     @Override
     public Calendar getNextCalendar(Calendar lastTimeCalendar) {
-        Log.d("DayRule" ,"lastTimeCalendar = " + lastTimeCalendar.toString());
+        Log.d("DayRule" ,"lastTimeCalendar = " + lastTimeCalendar.getTime().toString());
         Calendar copyCalendar = (Calendar)lastTimeCalendar.clone();
         copyCalendar.add(Calendar.DATE,1);
-        Log.d("DayRule" ,"copyCalendar = " + copyCalendar.toString());
+        Log.d("DayRule" ,"copyCalendar = " + copyCalendar.getTime().toString());
         return copyCalendar;
     }
 }

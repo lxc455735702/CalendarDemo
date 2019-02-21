@@ -81,7 +81,7 @@ public class CalendarTest {
 
     public static void testNextCalendar() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2018, 11, 31);
+        calendar.set(2019, 1, 21);
         String currentDate = calendar.getTime().toString();
         Log.i(TAG, "testNextCalendar currentDate=" + currentDate);
 
@@ -96,6 +96,5 @@ public class CalendarTest {
         Calendar monthCalendar = monthRule.getNextCalendar(calendar);
         String monthDate = monthCalendar.getTime().toString();
         Log.i(TAG, "testNextCalendar monthDate=" + monthDate);
-
     }
 }
