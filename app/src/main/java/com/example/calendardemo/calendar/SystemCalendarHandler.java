@@ -10,6 +10,7 @@ import android.provider.CalendarContract;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.calendardemo.calendar.entity.CalendarEventPojo;
 import com.example.calendardemo.calendar.rule.Rule;
 import com.example.calendardemo.calendar.rule.RuleFactory;
 
@@ -532,7 +533,7 @@ public class SystemCalendarHandler {
      * @param queryEndTimeSecond
      * @return
      */
-   /* public static List<CalendarEventPojo> queryCalendarEvent(Context context, long calendarId, long queryStartTimeSecond, long queryEndTimeSecond){
+    public static List<CalendarEventPojo> queryCalendarEvent(Context context, long calendarId, long queryStartTimeSecond, long queryEndTimeSecond){
         if(queryStartTimeSecond < 0 || queryEndTimeSecond < 0 || queryStartTimeSecond > queryEndTimeSecond){
             Log.d(TAG, "queryCalendarEventGroupByCalendar startTimeSecond="
                     + queryStartTimeSecond + ",endTimeSecond=" + queryEndTimeSecond);
@@ -547,7 +548,6 @@ public class SystemCalendarHandler {
         List<CalendarEventPojo> calendarEventPojoList = null;
         try{
             if(cursor.moveToFirst()){
-                String code = VanishSetting.getCode(VanishApplication.getContext());
                 calendarEventPojoList = new ArrayList<>();
                 do{
                     long eventId = cursor.getLong(cursor.getColumnIndex(CalendarContract.Instances.EVENT_ID));//系统日历事件
@@ -570,9 +570,9 @@ public class SystemCalendarHandler {
                     long duration = -1;
                     if(!TextUtils.isEmpty(durationStr)){
                         try{
-                            duration = CalendarTools.RFC2445ToMilliseconds(durationStr);
+//                            duration = CalendarTools.RFC2445ToMilliseconds(durationStr);
                         }catch (Exception e){
-                            StackTrace2StringUtil.getStackMsg(e);
+                            e.printStackTrace();
                         }
                     }
                     if(curEndTimeMillis == 0 && duration != -1){
@@ -581,32 +581,32 @@ public class SystemCalendarHandler {
                     long curEndTimeSecond = curEndTimeMillis / 1000;
 
                     if(allDay == CalendarConstantData.IS_ALL_DAY){
-                        startTimeSecond = dealAllDayStartTime(startTimeSecond);
-                        curStartTimeSecond = dealAllDayStartTime(curStartTimeSecond);
-                        endTimeSecond = dealAllDaysEndTime(endTimeSecond);
-                        curEndTimeSecond = dealAllDaysEndTime(curEndTimeSecond);
+//                        startTimeSecond = dealAllDayStartTime(startTimeSecond);
+//                        curStartTimeSecond = dealAllDayStartTime(curStartTimeSecond);
+//                        endTimeSecond = dealAllDaysEndTime(endTimeSecond);
+//                        curEndTimeSecond = dealAllDaysEndTime(curEndTimeSecond);
                     }
-
-                    int repeat = CalendarTools.getRepeatByRRULE(rrule);
-
+                    Log.d(TAG,"rrule = " + rrule);
+//                    int repeat = CalendarTools.getRepeatByRRULE(rrule);
+                    int repeat = 0 ;
                     CalendarEventPojo calendarEventPojo = new CalendarEventPojo(eventId, systemId + "",
                             title, location, startTimeSecond, endTimeSecond, allDay, 1,
-                            repeat, description, title,
-                            0, CalendarConstantData.NOT_DELETE, null, 0, code, durationStr, rrule);
+                            repeat, description, 0,
+                            CalendarConstantData.NOT_DELETE, null, 0,durationStr, rrule);
                     calendarEventPojo.setSystemEvent(true);
-                    calendarEventPojo.setShowStartTime(curStartTimeSecond);
-                    calendarEventPojo.setShowEndTime(curEndTimeSecond);
+//                    calendarEventPojo.setShowStartTime(curStartTimeSecond);
+//                    calendarEventPojo.setShowEndTime(curEndTimeSecond);
                     calendarEventPojo.reBuildExtraParams();
                     calendarEventPojoList.add(calendarEventPojo);
                 }while(cursor.moveToNext());
             }
         }catch (Exception e){
-            StackTrace2StringUtil.getStackMsg(e);
+            e.printStackTrace();
         }finally {
             cursor.close();
         }
         return  calendarEventPojoList;
-    }*/
+    }
 
     public static class OnCalendarListener {
         public enum Status {

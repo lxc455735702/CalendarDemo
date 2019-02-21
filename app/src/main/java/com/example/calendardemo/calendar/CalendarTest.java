@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.calendardemo.application.TestApplication;
+import com.example.calendardemo.calendar.entity.CalendarEventPojo;
 import com.example.calendardemo.calendar.rule.Rule;
 import com.example.calendardemo.calendar.rule.RuleFactory;
 
@@ -16,8 +17,8 @@ public class CalendarTest {
     private static final String TAG = "CalendarTest";
 
     public static void test() {
-//        testQueryCalendarEvent();
-//        testNextCalendar();
+        testQueryCalendarEvent();
+        testNextCalendar();
     }
 
     public static void testCheckAndAddCalendarAccounts() {
@@ -71,12 +72,19 @@ public class CalendarTest {
 
     }
 
-    public static void testQueryCalendarEvent() {
+    public static List<CalendarEventPojo> testQueryCalendarEvent() {
         long calendarId = SystemCalendarHandler.checkCalendarAccounts(TestApplication.getAppContext());
         Log.i(TAG, "testQueryCalendarEvent calendarId=" + calendarId);
-        long startTimeSecond = System.currentTimeMillis() / 1000;
+        long startTimeSecond = System.currentTimeMillis() / 1000  - 60 * 60 * 24;
         long endTimeSecond = startTimeSecond + 5 * 24 * 60 * 60;
-//        SystemCalendarHandler.queryCalendarEvent(TestApplication.getAppContext(), calendarId, startTimeSecond, endTimeSecond);
+        List<CalendarEventPojo> list = SystemCalendarHandler.queryCalendarEvent(TestApplication.getAppContext(), calendarId, startTimeSecond, endTimeSecond);
+        if (list == null ){
+            return null;
+        }
+//        for (CalendarEventPojo eventPojo : list){
+//           Log.d(TAG,"testQueryCalendarEvent eventPojo = " + eventPojo.toString());
+//        }
+        return list;
     }
 
     public static void testNextCalendar() {

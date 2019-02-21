@@ -1,5 +1,6 @@
 package com.example.calendardemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -75,7 +76,7 @@ public class MainActivity extends BaseActivity {
                 } else if ("修改行程".equals(actionString)) {
 
                 } else if ("查询行程".equals(actionString)) {
-
+                    startCOActivity(CalendarInfoActivity.class);
                 }
             }
         });

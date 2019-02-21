@@ -83,7 +83,7 @@ public class CalendarTools {
         return calendar;
     }
 
-    private static String getSsimpleDateFormatYMDHMS(long time){
+    public static String getSsimpleDateFormatYMDHMS(long time){
         return format_ymdhms.format(new Date(time));
     }
 

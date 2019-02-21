@@ -1,6 +1,7 @@
 package com.example.calendardemo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -39,5 +40,10 @@ public class BaseActivity extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
         inflater.inflate(layoutResID, this.mBaseLayout);
         ButterKnife.bind(this);
+    }
+
+    public void startCOActivity(Class<?> c) {
+        Intent intent = new Intent(this, c);
+        this.startActivity(intent);
     }
 }
