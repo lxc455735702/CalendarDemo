@@ -9,10 +9,6 @@ import android.provider.CalendarContract;
  */
 public class CalendarConstantData {
 
-    public static String CALANDER_URL = "content://com.android.calendar/calendars";
-    public static String CALANDER_EVENT_URL = "content://com.android.calendar/events";
-    public static String CALANDER_REMIDER_URL = "content://com.android.calendar/reminders";
-
     // 日历表Uri
     public static final Uri CALENDAR_URI = CalendarContract.Calendars.CONTENT_URI;
     //事件表Uri

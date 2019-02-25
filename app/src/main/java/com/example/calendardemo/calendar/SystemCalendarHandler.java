@@ -306,7 +306,7 @@ public class SystemCalendarHandler {
                                           String notes, String invalidDays, long deadline){
         long calendarId = checkAndAddCalendarAccounts(context);
         if(calendarId < 0){
-            Log.d(TAG, "updateCalendarEvent calendarId=" + calendarId + " >error!");
+            Log.d(TAG, "updateCalendarEvent calendarId = " + calendarId + " >error!");
             return null;
         }
         //先删除日历事件
@@ -371,7 +371,6 @@ public class SystemCalendarHandler {
             Uri deleteUri = ContentUris.withAppendedId(CalendarConstantData.REMINDER_URI, itemSystemId);
             int rows = context.getContentResolver().delete(deleteUri, null, null);
         }
-
         return 0;
     }
 
@@ -386,7 +385,7 @@ public class SystemCalendarHandler {
      * @param notes
      * @return 返回eventId
      */
-    /*public static OnCalendarListener insertCalendarEventAndReminder(Context context, String title, String location,
+    public static OnCalendarListener insertCalendarEventAndReminder(Context context, String title, String location,
                                            long startTimeSecond, long endTimeSecond,  int allDay,
                                            int repeats, String notes, String invalidDays, long deadline){
         OnCalendarListener onCalendarListener = new OnCalendarListener();
@@ -428,7 +427,7 @@ public class SystemCalendarHandler {
         onCalendarListener.setEventIdAndReminderIdList(eventIdAndReminderIdList);
 
         return onCalendarListener;
-    }*/
+    }
 
     /**
      * 删除事件和提醒
@@ -471,59 +470,6 @@ public class SystemCalendarHandler {
         onCalendarListener.setEventIdAndReminderIdList(eventIdAndReminderIdList);
         return onCalendarListener;
     }
-
-    /**
-     * 按日期分组获取系统日历事件实例
-     * @param context
-     * @param startTimeSecond
-     * @param endTimeSecond
-     * @return
-     */
-    /*public static LinkedHashMap<EventGroup, List<CalendarEventPojo>> queryCalendarEventGroupByCalendar(
-            Context context, long startTimeSecond, long endTimeSecond){
-        if(startTimeSecond < 0 || endTimeSecond < 0 || startTimeSecond > endTimeSecond){
-            Log.d(TAG, "queryCalendarEventGroupByCalendar startTimeSecond="
-                    + startTimeSecond + ",endTimeSecond=" + endTimeSecond);
-            return null;
-        }
-        long calendarId = SystemCalendarHandler.
-        (VanishApplication.getContext());
-        List<CalendarEventPojo> calendarEventPojoList = queryCalendarEvent(context, calendarId, startTimeSecond, endTimeSecond);
-        if(null == calendarEventPojoList || calendarEventPojoList.size() == 0){
-            Log.d(TAG, "queryCalendarEventGroupByCalendar calendarEventPojoList is null>error!");
-            return null;
-        }
-        LinkedHashMap<EventGroup, List<CalendarEventPojo>> map = new LinkedHashMap<>();
-        Calendar startCalendar = CalendarTools.getCalendar(startTimeSecond);
-        int count = CalendarTools.getIntervalDays(startTimeSecond, endTimeSecond);
-        CalendarEventPojo.CalendarEventPojoComparator calendarEventPojoComparator = new CalendarEventPojo.CalendarEventPojoComparator();
-        for(int i = 0; i < count; i++){
-            Calendar calendarItem = CalendarTools.getCalendarAddCount(startCalendar, i);
-            List<CalendarEventPojo> itemCalendarEventPojoList = new ArrayList<>();
-            for(CalendarEventPojo calendarEventPojo : calendarEventPojoList){
-                long itemStartTimeSecond = calendarEventPojo.getShowStartTime();
-                long itemEndTimeSecond = calendarEventPojo.getShowEndTime();
-
-                Calendar itemStartTimeCalendar = CalendarTools.getCalendar(itemStartTimeSecond);
-                Calendar itemEndTimeCalendar = CalendarTools.getCalendar(itemEndTimeSecond);
-                int startCompareResult = CalendarTools.compareYMD(itemStartTimeCalendar, calendarItem);
-                int endCompareResult = CalendarTools.compareYMD(calendarItem, itemEndTimeCalendar);
-                if((startCompareResult == -1 || startCompareResult == 0)
-                        && (endCompareResult == -1 || endCompareResult == 0)){
-                    itemCalendarEventPojoList.add(calendarEventPojo);
-                }
-            }
-
-            Collections.sort(itemCalendarEventPojoList, calendarEventPojoComparator);
-
-            if(null != itemCalendarEventPojoList && itemCalendarEventPojoList.size() > 0){
-                EventGroup eventGroup = new EventGroup();
-                eventGroup.setCalendar(calendarItem);
-                map.put(eventGroup, itemCalendarEventPojoList);
-            }
-        }
-        return map;
-    }*/
 
     /**
      * 查询日历事件
@@ -594,8 +540,8 @@ public class SystemCalendarHandler {
                             repeat, description, 0,
                             CalendarConstantData.NOT_DELETE, null, 0,durationStr, rrule);
                     calendarEventPojo.setSystemEvent(true);
-//                    calendarEventPojo.setShowStartTime(curStartTimeSecond);
-//                    calendarEventPojo.setShowEndTime(curEndTimeSecond);
+                    calendarEventPojo.setShowStartTime(curStartTimeSecond);
+                    calendarEventPojo.setShowEndTime(curEndTimeSecond);
                     calendarEventPojo.reBuildExtraParams();
                     calendarEventPojoList.add(calendarEventPojo);
                 }while(cursor.moveToNext());
@@ -791,6 +737,6 @@ public class SystemCalendarHandler {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeSecond * 1000);
         return CalendarTools.getEndTimeOfLastDaySecond(calendar);
-    }*/
+}*/
 
 }

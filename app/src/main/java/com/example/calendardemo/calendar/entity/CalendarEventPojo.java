@@ -40,6 +40,10 @@ public class CalendarEventPojo {
 
     String rrule;
 
+    long showStartTime;
+
+    long showEndTime;
+
     public CalendarEventPojo(long eventId, String system_id, String title, String location, long startTimeSecond,
                              long endTimeSecond, int allDay, int sync_phone, int repeat, String description,
                              int sync_service, int is_delete, String invalid_days, int deadline,
@@ -200,9 +204,26 @@ public class CalendarEventPojo {
         this.rrule = rrule;
     }
 
+    public long getShowStartTime() {
+        return showStartTime;
+    }
+
+    public void setShowStartTime(long showStartTime) {
+        this.showStartTime = showStartTime;
+    }
+
+    public long getShowEndTime() {
+        return showEndTime;
+    }
+
+    public void setShowEndTime(long showEndTime) {
+        this.showEndTime = showEndTime;
+    }
+
     public void reBuildExtraParams() {
 
     }
+
 
     @Override
     public String toString() {
@@ -230,8 +251,14 @@ public class CalendarEventPojo {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof CalendarEventPojo) {
-            if (this.getEvent_id().equals(((CalendarEventPojo) obj).getEvent_id())) {
-                return true;
+            CalendarEventPojo calendarEventPojo = ((CalendarEventPojo) obj);
+            if (this.getEvent_id().equals(calendarEventPojo.getEvent_id())) {
+                // 每个日历的实例的strattime 开始时间是一样的，无法根据id 来区别是否一直 有可能是重复事件
+                if (this.getShowStartTime() == calendarEventPojo.getShowStartTime()) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
