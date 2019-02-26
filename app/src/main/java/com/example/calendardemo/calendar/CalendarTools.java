@@ -88,14 +88,29 @@ public class CalendarTools {
     }
 
     //获取当天（按当前传入的时区）00:00:00所对应时刻的long型值
-    private static long getStartTimeOfDaySecond(Calendar calendar) {
+    public static long getStartTimeOfDaySecond(Calendar calendar) {
         //todo 还需要测试
         long now = calendar.getTime().getTime();
         String timeZone = calendar.getTimeZone().toString();
         String tz = TextUtils.isEmpty(timeZone) ? "GMT+8" : timeZone;
         TimeZone curTimeZone = TimeZone.getTimeZone(tz);
         long oneDay = TimeUnit.DAYS.toMillis(1);//一天时间的毫秒值
-        return (now - (now % oneDay) - curTimeZone.getRawOffset());
+        return (now - (now % oneDay) - curTimeZone.getRawOffset())/1000;
+    }
+
+
+    public static long getEndTimeOfLastDaySecond(Calendar calendar){
+        calendar.set(Calendar.HOUR, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.add(Calendar.DATE,-1);
+        return calendar.getTimeInMillis()/1000;
+    }
+
+    public static long RFC2445ToMilliseconds(String durationStr){
+        //todo
+         return  -1;
     }
 
 }

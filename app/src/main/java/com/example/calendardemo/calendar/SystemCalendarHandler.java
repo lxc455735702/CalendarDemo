@@ -516,7 +516,7 @@ public class SystemCalendarHandler {
                     long duration = -1;
                     if(!TextUtils.isEmpty(durationStr)){
                         try{
-//                            duration = CalendarTools.RFC2445ToMilliseconds(durationStr);
+                            duration = CalendarTools.RFC2445ToMilliseconds(durationStr);
                         }catch (Exception e){
                             e.printStackTrace();
                         }
@@ -527,10 +527,10 @@ public class SystemCalendarHandler {
                     long curEndTimeSecond = curEndTimeMillis / 1000;
 
                     if(allDay == CalendarConstantData.IS_ALL_DAY){
-//                        startTimeSecond = dealAllDayStartTime(startTimeSecond);
-//                        curStartTimeSecond = dealAllDayStartTime(curStartTimeSecond);
-//                        endTimeSecond = dealAllDaysEndTime(endTimeSecond);
-//                        curEndTimeSecond = dealAllDaysEndTime(curEndTimeSecond);
+                        startTimeSecond = dealAllDayStartTime(startTimeSecond);
+                        curStartTimeSecond = dealAllDayStartTime(curStartTimeSecond);
+                        endTimeSecond = dealAllDaysEndTime(endTimeSecond);
+                        curEndTimeSecond = dealAllDaysEndTime(curEndTimeSecond);
                     }
                     Log.d(TAG,"rrule = " + rrule);
 //                    int repeat = CalendarTools.getRepeatByRRULE(rrule);
@@ -717,11 +717,11 @@ public class SystemCalendarHandler {
      * 所以对系统全天事件的开始时间和结束时间做处理
      * @param timeSecond
      */
-  /*  private static long dealAllDayStartTime(long timeSecond){
+    private static long dealAllDayStartTime(long timeSecond){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeSecond * 1000);
         return CalendarTools.getStartTimeOfDaySecond(calendar);
-    }*/
+    }
 
     /**
      * 处理全天事件结束时间
@@ -733,10 +733,10 @@ public class SystemCalendarHandler {
      * 所以对系统全天事件的开始时间和结束时间做处理
      * @param timeSecond
      */
-/*    private static long dealAllDaysEndTime(long timeSecond){
+    private static long dealAllDaysEndTime(long timeSecond){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeSecond * 1000);
         return CalendarTools.getEndTimeOfLastDaySecond(calendar);
-}*/
+}
 
 }
