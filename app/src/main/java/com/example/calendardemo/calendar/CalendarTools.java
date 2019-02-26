@@ -1,6 +1,7 @@
 package com.example.calendardemo.calendar;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -109,8 +110,19 @@ public class CalendarTools {
     }
 
     public static long RFC2445ToMilliseconds(String durationStr){
-        //todo
-         return  -1;
+        long millisenconds = -1;
+        if (TextUtils.isEmpty(durationStr)){
+            return millisenconds;
+        }
+        String test = "";
+        try {
+            test = durationStr.replace("P","");
+            test = test.replace("S","");
+            millisenconds = Long.valueOf(test);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return  millisenconds;
     }
 
 }

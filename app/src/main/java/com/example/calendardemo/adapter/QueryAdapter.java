@@ -27,7 +27,7 @@ public class QueryAdapter extends BaseQuickAdapter<CalendarEventPojo, BaseViewHo
                 .setText(R.id.title, item.getTitle())
                 .setText(R.id.location, item.getLocation())
                 .setText(R.id.start_time, CalendarTools.getSsimpleDateFormatYMDHMS(item.getShowStartTime() * 1000))
-                .setText(R.id.end_time, item.getEnd_time() == 0 ?
+                .setText(R.id.end_time, item.getShowEndTime() == 0 ?
                         "" : CalendarTools.getSsimpleDateFormatYMDHMS(item.getShowEndTime() * 1000))
                 .setText(R.id.allday, item.getAll_day() + "")
                 .setText(R.id.notes, item.getNotes())
