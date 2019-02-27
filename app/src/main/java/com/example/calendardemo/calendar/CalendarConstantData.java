@@ -44,6 +44,8 @@ public class CalendarConstantData {
 
     public static final int CALENDAR_EVENT_REPEAT_EVERY_YEAR = 5;
 
+    public static final int CALENDAR_EVENT_REPEAT_UNKNOWN = 6;//未知repeat规则，来自系统读取
+
     public static final int IS_ALL_DAY = 1; //是全天事件
 
     public static final int NOT_DELETE = 0 ;

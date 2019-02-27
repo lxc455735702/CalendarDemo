@@ -533,8 +533,7 @@ public class SystemCalendarHandler {
                         curEndTimeSecond = dealAllDaysEndTime(curEndTimeSecond);
                     }
                     Log.d(TAG,"rrule = " + rrule);
-//                    int repeat = CalendarTools.getRepeatByRRULE(rrule);
-                    int repeat = 0 ;
+                    int repeat = CalendarTools.getRepeatByRRULE(rrule);
                     CalendarEventPojo calendarEventPojo = new CalendarEventPojo(eventId, systemId + "",
                             title, location, startTimeSecond, endTimeSecond, allDay, 1,
                             repeat, description, 0,

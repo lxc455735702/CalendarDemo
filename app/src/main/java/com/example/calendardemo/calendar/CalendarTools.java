@@ -114,15 +114,39 @@ public class CalendarTools {
         if (TextUtils.isEmpty(durationStr)){
             return millisenconds;
         }
-        String test = "";
+        String seconds = "";
         try {
-            test = durationStr.replace("P","");
-            test = test.replace("S","");
-            millisenconds = Long.valueOf(test);
+            seconds = durationStr.replace("P","");
+            seconds = seconds.replace("S","");
+            millisenconds = Long.valueOf(seconds);
         }catch (Exception e){
             e.printStackTrace();
         }
         return  millisenconds;
+    }
+
+    /**
+     * 根据rrule规则获取重复类型
+     * @param rrule
+     * @return
+     */
+    public static int getRepeatByRRULE(String rrule){
+        if(TextUtils.isEmpty(rrule)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_NEVER;
+        }
+        rrule = rrule.toUpperCase();
+        if(rrule.startsWith(CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_DAY_RRULE)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_DAY;
+        }else if(rrule.startsWith(CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_2_WEEK_RRULE)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_2_WEEK;
+        }else if(rrule.startsWith(CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_WEEK_RRULE)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_WEEK;
+        }else if(rrule.startsWith(CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_MONTH_RRULE)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_MONTH;
+        }else if(rrule.startsWith(CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_YEAR_RRULE)){
+            return CalendarConstantData.CALENDAR_EVENT_REPEAT_EVERY_YEAR;
+        }
+        return CalendarConstantData.CALENDAR_EVENT_REPEAT_UNKNOWN;
     }
 
 }
